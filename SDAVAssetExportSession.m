@@ -336,6 +336,19 @@
 		float postHeight = naturalSize.height * ratio;
 		float transx = (targetSize.width - postWidth) / 2;
 		float transy = (targetSize.height - postHeight) / 2;
+		
+		if (videoAngleInDegree == -90 && transform.ty == 0) {
+            		transy += postHeight;
+        	}
+		
+        	if (videoAngleInDegree == 90 && transform.tx == 0) {
+            		transx += postWidth;
+        	}
+        
+        	if (fabs(videoAngleInDegree) == 180 && transform.tx == 0 && transform.ty == 0) {
+            		transy += postHeight;
+            		transx += postWidth;
+		}
 
 		CGAffineTransform matrix = CGAffineTransformMakeTranslation(transx / xratio, transy / yratio);
 		matrix = CGAffineTransformScale(matrix, ratio / xratio, ratio / yratio);
